@@ -10,12 +10,11 @@ import java.util.List;
 
 public class GameService {
     private List<Car> carList;
-    private Computer computer;
-    private Referee referee;
+    private final Referee referee;
 
     public GameService(Computer computer) {
         this.carList = new ArrayList<>();
-        this.computer = computer;
+        this.referee = new Referee(computer);
     }
 
     public List<Car> makeCarList(int carNumber) {
@@ -24,8 +23,8 @@ public class GameService {
                 carList.add(new Car());
             }
         }
-        referee = new Referee(computer);
-        return referee.provideNumberToCar(carList);
+        carList = referee.provideNumberToCar(carList);
+        return carList;
     }
 
     public void clearCarList(int nowTryNumber, int tryNumber) {
