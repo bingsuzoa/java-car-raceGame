@@ -1,13 +1,13 @@
 package com.gameRace.model;
 
-import com.gameRace.model.computer.Computer;
+import com.gameRace.model.condition.Condition;
 
 public class Car {
-    private final Computer computer;
+    private final Condition condition;
     private int position;
 
-    public Car(Computer computer) {
-        this.computer = computer;
+    public Car(Condition condition) {
+        this.condition = condition;
         this.position = 1;
     }
 
@@ -20,8 +20,7 @@ public class Car {
     }
 
     private void addPosition() {
-        int randomNumber = computer.makeNumber();
-        if (randomNumber >= 4) {
+        if (condition.canMove()) {
             position++;
         }
     }
