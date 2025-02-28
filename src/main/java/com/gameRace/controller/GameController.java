@@ -17,7 +17,7 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    public void getCarNumberAndTryNumber() {
+    public void startGame() {
         int carNumber = Integer.parseInt(getValidPlayerInput(PlayOption.CAR_NUMBER));
         int tryNumber = Integer.parseInt(getValidPlayerInput(PlayOption.TRY_NUMBER));
         startGameAndGetResult(carNumber, tryNumber);
@@ -39,7 +39,7 @@ public class GameController {
     }
 
     private boolean validateInput(String input) {
-        if (input.matches("^[0-9]+$")) {
+        if (input.matches("^[1-9]+$")) {
             return true;
         }
         outputView.printNotInvalidMessage();
@@ -50,7 +50,7 @@ public class GameController {
         outputView.printResultMessage();
         for (int i = 1; i <= tryNumber; i++) {
             printResult(gameService.startGame(i, carNumber));
-            gameService.getNowTryNumber(i, tryNumber);
+            gameService.checkGameOver(i, tryNumber);
         }
     }
 }

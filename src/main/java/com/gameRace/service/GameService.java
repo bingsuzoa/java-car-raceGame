@@ -1,23 +1,23 @@
 package com.gameRace.service;
 
 import com.gameRace.model.Car;
-import com.gameRace.model.computer.Computer;
+import com.gameRace.model.condition.Condition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
-    private static final int FIRST_TRY = 1;
-    private final Computer computer;
+    private static final int FIRST_ATTEMPT = 1;
+    private final Condition condition;
     private List<Car> carList;
 
-    public GameService(Computer computer) {
-        this.computer = computer;
+    public GameService(Condition condition) {
+        this.condition = condition;
         this.carList = new ArrayList<>();
     }
 
     public List<Car> startGame(int tryNumber, int carNumber) {
-        if(tryNumber == FIRST_TRY) {
+        if(tryNumber == FIRST_ATTEMPT) {
             makeCarList(carNumber);
         }
         for (Car car : carList) {
@@ -26,7 +26,7 @@ public class GameService {
         return carList;
     }
 
-    public void getNowTryNumber(int nowTryNumber, int tryNumber) {
+    public void checkGameOver(int nowTryNumber, int tryNumber) {
         if (nowTryNumber == tryNumber) {
             carList.clear();
         }
@@ -34,7 +34,7 @@ public class GameService {
 
     private void makeCarList(int carNumber) {
         for (int i = 0; i < carNumber; i++) {
-            carList.add(new Car(computer));
+            carList.add(new Car(condition));
         }
     }
 }

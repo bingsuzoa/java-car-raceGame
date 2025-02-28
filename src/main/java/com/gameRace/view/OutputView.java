@@ -25,7 +25,7 @@ public class OutputView {
     }
 
     public void printResult(int moveCount) {
-        for(int i = 0; i < moveCount; i++) {
+        for (int i = 0; i < moveCount; i++) {
             System.out.print(Message.CAR.getMessage());
         }
         System.out.println();
