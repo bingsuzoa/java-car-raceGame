@@ -16,7 +16,8 @@ public class GameServiceTest {
     @DisplayName("플레이어가 입력한 자동차 대수만큼 List에 Car가 생기도록 하는 테스트")
     void startGame() {
         int carNumber = 5;
-        Assertions.assertThat(gameService.startGame(carNumber).size()).isEqualTo(carNumber);
+        int tryNumber = 1;
+        Assertions.assertThat(gameService.startGame(tryNumber, carNumber).size()).isEqualTo(carNumber);
     }
 
 

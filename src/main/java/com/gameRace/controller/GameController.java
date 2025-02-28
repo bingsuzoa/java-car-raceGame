@@ -25,7 +25,7 @@ public class GameController {
 
     public void printResult(List<Car> carList) {
         for (int i = 0; i < carList.size(); i++) {
-            outputView.printResult(carList.get(i).getMoveCount());
+            outputView.printResult(carList.get(i).getPosition());
         }
         outputView.printBlank();
     }
@@ -49,7 +49,7 @@ public class GameController {
     private void startGameAndGetResult(int carNumber, int tryNumber) {
         outputView.printResultMessage();
         for (int i = 1; i <= tryNumber; i++) {
-            printResult(gameService.startGame(carNumber));
+            printResult(gameService.startGame(i, carNumber));
             gameService.getNowTryNumber(i, tryNumber);
         }
     }
