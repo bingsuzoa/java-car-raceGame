@@ -4,8 +4,8 @@ import com.gameRace.model.Car;
 import com.gameRace.service.GameService;
 import com.gameRace.view.InputView;
 import com.gameRace.view.OutputView;
+import com.gameRace.view.PlayOption;
 
-import java.util.InputMismatchException;
 import java.util.List;
 
 public class GameController {
@@ -18,13 +18,9 @@ public class GameController {
     }
 
     public void getCarNumberAndTryNumber() {
-        try {
-            int carNumber = inputView.getCarNumber();
-            int tryNumber = inputView.getTryNumber();
-            startGameAndGetResult(carNumber, tryNumber);
-        } catch (InputMismatchException e) {
-            outputView.printNotInvalidMessage();
-        }
+        int carNumber = Integer.parseInt(getValidPlayerInput(PlayOption.CAR_NUMBER));
+        int tryNumber = Integer.parseInt(getValidPlayerInput(PlayOption.TRY_NUMBER));
+        startGameAndGetResult(carNumber, tryNumber);
     }
 
     public void printResult(List<Car> carList) {
@@ -32,6 +28,22 @@ public class GameController {
             outputView.printResult(carList.get(i).getMoveCount());
         }
         outputView.printBlank();
+    }
+
+    private String getValidPlayerInput(PlayOption playOption) {
+        String input;
+        do {
+            input = inputView.getPlayerInput(playOption);
+        } while (!validateInput(input));
+        return input;
+    }
+
+    private boolean validateInput(String input) {
+        if (input.matches("^[0-9]+$")) {
+            return true;
+        }
+        outputView.printNotInvalidMessage();
+        return false;
     }
 
     private void startGameAndGetResult(int carNumber, int tryNumber) {
