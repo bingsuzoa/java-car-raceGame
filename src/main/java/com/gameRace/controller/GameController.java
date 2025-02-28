@@ -5,6 +5,7 @@ import com.gameRace.service.GameService;
 import com.gameRace.view.InputView;
 import com.gameRace.view.OutputView;
 
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class GameController {
@@ -17,9 +18,13 @@ public class GameController {
     }
 
     public void getCarNumberAndTryNumber() {
-        int carNumber = inputView.getCarNumber();
-        int tryNumber = inputView.getTryNumber();
-        startGameAndGetResult(carNumber, tryNumber);
+        try {
+            int carNumber = inputView.getCarNumber();
+            int tryNumber = inputView.getTryNumber();
+            startGameAndGetResult(carNumber, tryNumber);
+        } catch (InputMismatchException e) {
+            outputView.printNotInvalidMessage();
+        }
     }
 
     public void printResult(List<Car> carList) {

@@ -16,6 +16,10 @@ public class OutputView {
         System.out.println(message.getMessage());
     }
 
+    public void printNotInvalidMessage() {
+        System.out.println(Message.ERROR_INVALID_INPUT.getMessage());
+    }
+
     public void printResultMessage() {
         System.out.println(Message.RESULT_MESSAGE.getMessage());
     }
