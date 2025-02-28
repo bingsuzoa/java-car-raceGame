@@ -1,7 +1,6 @@
 package com.gameRace.view;
 
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputView {
@@ -21,14 +20,13 @@ public class InputView {
         return instance;
     }
 
-    public int getCarNumber() throws InputMismatchException {
-        outputView.printMessage(Message.GET_CAR_NUMBER);
-        return scanner.nextInt();
-    }
-
-    public int getTryNumber() throws InputMismatchException {
+    public String getPlayerInput(PlayOption playOption) {
+        if(PlayOption.CAR_NUMBER == playOption) {
+            outputView.printMessage(Message.GET_CAR_NUMBER);
+            return scanner.nextLine();
+        }
         outputView.printMessage(Message.GET_TRY_NUMBER);
-        return scanner.nextInt();
+        return scanner.nextLine();
     }
 
 }
