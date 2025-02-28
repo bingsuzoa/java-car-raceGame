@@ -1,7 +1,6 @@
 package com.gameRace.view;
 
 
-
 import java.util.Scanner;
 
 public class InputView {
@@ -21,8 +20,14 @@ public class InputView {
         return instance;
     }
 
-    public int getNumberFromPlayer(Message message) {
-        outputView.printMessage(message);
+    public int getCarNumber() {
+        outputView.printMessage(Message.GET_CAR_NUMBER);
         return scanner.nextInt();
     }
+
+    public int getTryNumber() {
+        outputView.printMessage(Message.GET_TRY_NUMBER);
+        return scanner.nextInt();
+    }
+
 }

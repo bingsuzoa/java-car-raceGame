@@ -18,10 +18,10 @@ public class GameController {
     }
 
     public void gameStart() {
-        int carNumber = inputView.getNumberFromPlayer(Message.GET_CAR_NUMBER);
-        int tryNumber = inputView.getNumberFromPlayer(Message.GET_TRY_NUMBER);
+        int carNumber = inputView.getCarNumber();
+        int tryNumber = inputView.getTryNumber();
         outputView.printMessage(Message.RESULT_MESSAGE);
-        for(int i = 1; i <= tryNumber; i++) {
+        for (int i = 1; i <= tryNumber; i++) {
             printResult(gameService.makeCarList(carNumber));
             gameService.clearCarList(i, tryNumber);
         }
