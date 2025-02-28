@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
+    private static final int FIRST_TRY = 1;
     private final Computer computer;
     private List<Car> carList;
 
@@ -15,10 +16,12 @@ public class GameService {
         this.carList = new ArrayList<>();
     }
 
-    public List<Car> startGame(int carNumber) {
-        makeCarList(carNumber);
+    public List<Car> startGame(int tryNumber, int carNumber) {
+        if(tryNumber == FIRST_TRY) {
+            makeCarList(carNumber);
+        }
         for (Car car : carList) {
-            car.decideMoveOrStop();
+            car.move();
         }
         return carList;
     }
@@ -30,10 +33,8 @@ public class GameService {
     }
 
     private void makeCarList(int carNumber) {
-        if (carList.isEmpty()) {
-            for (int i = 0; i < carNumber; i++) {
-                carList.add(new Car(computer));
-            }
+        for (int i = 0; i < carNumber; i++) {
+            carList.add(new Car(computer));
         }
     }
 }

@@ -4,25 +4,25 @@ import com.gameRace.model.computer.Computer;
 
 public class Car {
     private final Computer computer;
-    private int moveCount;
+    private int position;
 
     public Car(Computer computer) {
         this.computer = computer;
-        this.moveCount = 1;
+        this.position = 1;
     }
 
-    public int getMoveCount() {
-        return moveCount;
+    public int getPosition() {
+        return position;
     }
 
-    public void decideMoveOrStop() {
-        addMoveCount();
+    public void move() {
+        addPosition();
     }
 
-    private void addMoveCount() {
+    private void addPosition() {
         int randomNumber = computer.makeNumber();
         if (randomNumber >= 4) {
-            moveCount++;
+            position++;
         }
     }
 }
