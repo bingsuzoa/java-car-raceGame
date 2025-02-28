@@ -11,6 +11,6 @@ public class Main {
         GameService gameService = new GameService(computer);
         GameController gameController = new GameController(gameService);
 
-        gameController.gameStart();
+        gameController.getCarNumberAndTryNumber();
     }
 }

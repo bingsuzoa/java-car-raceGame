@@ -1,9 +1,13 @@
 package com.gameRace.model;
 
+import com.gameRace.model.computer.Computer;
+
 public class Car {
+    private final Computer computer;
     private int moveCount;
 
-    public Car() {
+    public Car(Computer computer) {
+        this.computer = computer;
         this.moveCount = 1;
     }
 
@@ -11,12 +15,13 @@ public class Car {
         return moveCount;
     }
 
-    public void getNumberAndMove(int number) {
-        move(number);
+    public void decideMoveOrStop() {
+        addMoveCount();
     }
 
-    private void move(int number) {
-        if(number >= 4) {
+    private void addMoveCount() {
+        int randomNumber = computer.makeNumber();
+        if (randomNumber >= 4) {
             moveCount++;
         }
     }

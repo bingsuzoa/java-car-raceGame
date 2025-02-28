@@ -16,6 +16,10 @@ public class OutputView {
         System.out.println(message.getMessage());
     }
 
+    public void printResultMessage() {
+        System.out.println(Message.RESULT_MESSAGE.getMessage());
+    }
+
     public void printResult(int moveCount) {
         for(int i = 0; i < moveCount; i++) {
             System.out.print(Message.CAR.getMessage());
