@@ -7,6 +7,8 @@ public enum Message {
 
     RESULT_MESSAGE("실행 결과"),
 
+    ERROR_INVALID_INPUT("올바른 입력이 아닙니다. 다시 입력해주세요"),
+
     CAR("-");
 
     private final String message;
