@@ -39,7 +39,7 @@ public class GameController {
     }
 
     private boolean validateCarNames(String input) {
-        if (input.matches("^[A-Za-z].*[A-Za-z]$")) {
+        if (input.matches("^.*,.+$")) {
             return true;
         }
         outputView.printNotInvalidMessage();
