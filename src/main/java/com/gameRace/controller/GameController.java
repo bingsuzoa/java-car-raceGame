@@ -18,27 +18,43 @@ public class GameController {
     }
 
     public void startGame() {
-        int carNumber = Integer.parseInt(getValidPlayerInput(PlayOption.CAR_NUMBER));
-        int tryNumber = Integer.parseInt(getValidPlayerInput(PlayOption.TRY_NUMBER));
-        startGameAndGetResult(carNumber, tryNumber);
+        String carNames = getValidCarNames();
+        int tryNumber = Integer.parseInt(getValidTryNumber());
+        startGameAndGetResult(carNames, tryNumber);
     }
 
     public void printResult(List<Car> carList) {
         for (int i = 0; i < carList.size(); i++) {
-            outputView.printResult(carList.get(i).getPosition());
+            outputView.printResult(carList.get(i).getName(), carList.get(i).getPosition());
         }
         outputView.printBlank();
     }
 
-    private String getValidPlayerInput(PlayOption playOption) {
+    private String getValidCarNames() {
         String input;
         do {
-            input = inputView.getPlayerInput(playOption);
-        } while (!validateInput(input));
+            input = inputView.getPlayerInput(PlayOption.CAR_NAMES);
+        } while (!validateCarNames(input));
         return input;
     }
 
-    private boolean validateInput(String input) {
+    private boolean validateCarNames(String input) {
+        if (input.matches("^[A-Za-z].*[A-Za-z]$")) {
+            return true;
+        }
+        outputView.printNotInvalidMessage();
+        return false;
+    }
+
+    private String getValidTryNumber() {
+        String input;
+        do {
+            input = inputView.getPlayerInput(PlayOption.TRY_NUMBER);
+        } while (!validateTryNumber(input));
+        return input;
+    }
+
+    private boolean validateTryNumber(String input) {
         if (input.matches("^[1-9]+$")) {
             return true;
         }
@@ -46,11 +62,12 @@ public class GameController {
         return false;
     }
 
-    private void startGameAndGetResult(int carNumber, int tryNumber) {
+    private void startGameAndGetResult(String carNames, int tryNumber) {
         outputView.printResultMessage();
         for (int i = 1; i <= tryNumber; i++) {
-            printResult(gameService.startGame(i, carNumber));
-            gameService.checkGameOver(i, tryNumber);
+            printResult(gameService.startGame(carNames, i));
         }
+        outputView.printWinner(gameService.getWinner());
+        gameService.checkGameOver();
     }
 }
