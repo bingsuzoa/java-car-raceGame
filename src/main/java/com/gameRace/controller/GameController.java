@@ -34,27 +34,35 @@ public class GameController {
     private String getValidCarNames() {
         String input;
         do {
-            try {
-                input = inputView.getPlayerInput(PlayOption.CAR_NAMES);
-                inputValidator.validateCarNames(input);
-                return input;
-            } catch (IllegalArgumentException e) {
-                outputView.printNotInvalidMessage(e.getMessage());
-            }
-        } while (true);
+            input = inputView.getPlayerInput(PlayOption.CAR_NAMES);
+        } while (!checkValidationOfCarNames(input));
+        return input;
+    }
+
+    private boolean checkValidationOfCarNames(String input) {
+        try {
+            return inputValidator.validateCarNames(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printNotInvalidMessage(e.getMessage());
+            return false;
+        }
     }
 
     private String getValidTryNumber() {
         String input;
         do {
-            try {
-                input = inputView.getPlayerInput(PlayOption.TRY_NUMBER);
-                inputValidator.validateTryNumber(input);
-                return input;
-            } catch (IllegalArgumentException e) {
-                outputView.printNotInvalidMessage(e.getMessage());
-            }
-        } while (true);
+            input = inputView.getPlayerInput(PlayOption.TRY_NUMBER);
+        } while (!checkValidationOfTryNumber(input));
+        return input;
+    }
+
+    private boolean checkValidationOfTryNumber(String input) {
+        try {
+            return inputValidator.validateTryNumber(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printNotInvalidMessage(e.getMessage());
+            return false;
+        }
     }
 
     private void startGameAndGetResult(String carNames, int tryNumber) {
