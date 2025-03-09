@@ -20,8 +20,8 @@ public class OutputView {
         System.out.println(message.getMessage());
     }
 
-    public void printNotInvalidMessage() {
-        System.out.println(Message.ERROR_INVALID_INPUT.getMessage());
+    public void printNotInvalidMessage(String errorMessage) {
+        System.out.println(errorMessage);
     }
 
     public void printResultMessage() {

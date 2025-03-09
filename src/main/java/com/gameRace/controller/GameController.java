@@ -11,6 +11,7 @@ import java.util.List;
 public class GameController {
     private final InputView inputView = InputView.getInstance();
     private final OutputView outputView = OutputView.getInstance();
+    private final InputValidator inputValidator = new InputValidator();
     private final GameService gameService;
 
     public GameController(GameService gameService) {
@@ -33,33 +34,27 @@ public class GameController {
     private String getValidCarNames() {
         String input;
         do {
-            input = inputView.getPlayerInput(PlayOption.CAR_NAMES);
-        } while (!validateCarNames(input));
-        return input;
-    }
-
-    private boolean validateCarNames(String input) {
-        if (input.matches("^.*,.+$")) {
-            return true;
-        }
-        outputView.printNotInvalidMessage();
-        return false;
+            try {
+                input = inputView.getPlayerInput(PlayOption.CAR_NAMES);
+                inputValidator.validateCarNames(input);
+                return input;
+            } catch (IllegalArgumentException e) {
+                outputView.printNotInvalidMessage(e.getMessage());
+            }
+        } while (true);
     }
 
     private String getValidTryNumber() {
         String input;
         do {
-            input = inputView.getPlayerInput(PlayOption.TRY_NUMBER);
-        } while (!validateTryNumber(input));
-        return input;
-    }
-
-    private boolean validateTryNumber(String input) {
-        if (input.matches("^[1-9]+$")) {
-            return true;
-        }
-        outputView.printNotInvalidMessage();
-        return false;
+            try {
+                input = inputView.getPlayerInput(PlayOption.TRY_NUMBER);
+                inputValidator.validateTryNumber(input);
+                return input;
+            } catch (IllegalArgumentException e) {
+                outputView.printNotInvalidMessage(e.getMessage());
+            }
+        } while (true);
     }
 
     private void startGameAndGetResult(String carNames, int tryNumber) {
