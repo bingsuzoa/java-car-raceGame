@@ -5,6 +5,7 @@ import com.gameRace.model.condition.Condition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameService {
     private static final int FIRST_ATTEMPT = 1;
@@ -16,9 +17,9 @@ public class GameService {
         this.carList = new ArrayList<>();
     }
 
-    public List<Car> startGame(int tryNumber, int carNumber) {
-        if(tryNumber == FIRST_ATTEMPT) {
-            makeCarList(carNumber);
+    public List<Car> startGame(String carNames, int tryNumber) {
+        if (tryNumber == FIRST_ATTEMPT) {
+            makeCarList(carNames);
         }
         for (Car car : carList) {
             car.move();
@@ -26,15 +27,24 @@ public class GameService {
         return carList;
     }
 
-    public void checkGameOver(int nowTryNumber, int tryNumber) {
-        if (nowTryNumber == tryNumber) {
-            carList.clear();
-        }
+    public List<Car> getWinner() {
+        carList.sort((o1, o2) -> o2.getPosition() - o1.getPosition());
+        int winnerPosition = carList.get(0).getPosition();
+        return carList.stream()
+                .filter(car -> car.getPosition() == winnerPosition)
+                .collect(Collectors.toList());
+
     }
 
-    private void makeCarList(int carNumber) {
-        for (int i = 0; i < carNumber; i++) {
-            carList.add(new Car(condition));
+    public void checkGameOver() {
+        carList.clear();
+    }
+
+    private void makeCarList(String carNames) {
+        String[] carNamesArray = carNames.split(",");
+        for (int i = 0; i < carNamesArray.length; i++) {
+            String carName = carNamesArray[i].replace(" ", "");
+            carList.add(new Car(carName, condition));
         }
     }
 }

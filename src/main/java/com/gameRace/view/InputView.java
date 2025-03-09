@@ -21,11 +21,11 @@ public class InputView {
     }
 
     public String getPlayerInput(PlayOption playOption) {
-        if(PlayOption.CAR_NUMBER == playOption) {
-            outputView.printMessage(Message.GET_CAR_NUMBER);
+        if(PlayOption.CAR_NAMES == playOption) {
+            outputView.printMessage(Message.CAR_NAMES_INPUT_MESSAGE);
             return scanner.nextLine();
         }
-        outputView.printMessage(Message.GET_TRY_NUMBER);
+        outputView.printMessage(Message.TRY_NUMBER_INPUT_MESSAGE);
         return scanner.nextLine();
     }
 
