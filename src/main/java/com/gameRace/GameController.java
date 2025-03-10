@@ -1,9 +1,9 @@
 package com.gameRace;
 
 import com.gameRace.car.CarList;
-import com.gameRace.game.GameService;
-import com.gameRace.game.gameException.tryNumberException.InvalidTryNumberException;
+import com.gameRace.gameRaceException.InvalidTryNumberException;
 import com.gameRace.view.InputView;
+import com.gameRace.view.Message;
 import com.gameRace.view.OutputView;
 
 public class GameController {
@@ -20,11 +20,12 @@ public class GameController {
     public void startGame() {
         getCarList();
         getTryNumber();
+        outputView.printString(Message.RESULT_MESSAGE.getMessage());
         while(gameService.getNowRound() <= tryNumber) {
-            gameService.startGame(carList);
+            outputView.printRaceResult(gameService.startGame(carList));
         }
-        gameService.endGameIfFinalRound(gameService.getNowRound(), tryNumber);
         outputView.printWinnerNames(gameService.getWinnerNames());
+        gameService.endGameIfFinalRound(gameService.getNowRound(), tryNumber);
     }
 
     private void getTryNumber() {

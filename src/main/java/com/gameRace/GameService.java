@@ -1,4 +1,4 @@
-package com.gameRace.game;
+package com.gameRace;
 
 import com.gameRace.car.Car;
 import com.gameRace.car.CarList;
@@ -30,11 +30,8 @@ public class GameService {
     }
 
     public void endGameIfFinalRound(int nowRound, int tryNumber) {
-        if(nowRound > tryNumber) {
+        if (nowRound > tryNumber) {
             carList.clearCarList();
         }
     }
-
-
-
 }

@@ -30,7 +30,9 @@ public class CarList {
     }
 
     public List<String> getWinnerList() {
-        Collections.sort(carList, Collections.reverseOrder());
+        Collections.sort(carList, (o1,o2) -> {
+            return o2.getRaceCount() - o1.getRaceCount();
+        });
         int winnerRaceCount = carList.get(0).getRaceCount();
         return carList.stream()
                 .filter(car -> car.getRaceCount() == winnerRaceCount)

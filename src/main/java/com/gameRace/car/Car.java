@@ -1,5 +1,7 @@
 package com.gameRace.car;
 
+import com.gameRace.view.Message;
+
 import java.util.Random;
 
 public class Car {
@@ -19,6 +21,14 @@ public class Car {
 
     public int getRaceCount() {
         return raceCount;
+    }
+
+    public String getRaceCountResult() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < raceCount; i++) {
+            stringBuilder.append(Message.CAR.getMessage());
+        }
+        return stringBuilder.toString();
     }
 
     public void startRound() {
