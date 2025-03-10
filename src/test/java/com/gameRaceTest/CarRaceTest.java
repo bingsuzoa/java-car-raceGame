@@ -44,7 +44,7 @@ public class CarRaceTest {
         CarList carList = new CarList(input);
         int tryNumber = 3;
         int nowRound = 2;
-        gameService.startGame(carList);
+        gameService.initGame(carList);
         gameService.endGameIfFinalRound(nowRound, tryNumber);
         assertFalse(carList.getCarList().isEmpty());
 
@@ -59,8 +59,8 @@ public class CarRaceTest {
         String input = "car1,car2";
         CarList carList = new CarList(input);
         List<Car> answerCarList = carList.getCarList();
-
-        List<Car> carListFirstRace = gameService.startGame(carList);
+        gameService.initGame(carList);
+        List<Car> carListFirstRace = gameService.getRaceResult();
         for (int i = 0; i < carListFirstRace.size(); i++) {
             assert carListFirstRace.get(i).getRaceCount() >= answerCarList.get(i).getRaceCount();
         }
