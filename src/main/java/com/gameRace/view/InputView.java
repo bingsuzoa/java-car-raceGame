@@ -21,7 +21,7 @@ public class InputView {
         return scanner.nextLine();
     }
 
-    public String getTryNumberInput() {
+    public String getTryRoundInput() {
         outputView.printString(Message.TRY_NUMBER_INPUT_MESSAGE.getMessage());
         return scanner.nextLine();
     }

@@ -21,17 +21,17 @@ public class GameService {
         return carList.getWinnerList();
     }
 
-    public List<Car> startGame(CarList carList) {
-        this.carList = carList;
-
+    public List<Car> getRaceResult() {
         carList.startRace();
         this.nowRound++;
         return carList.getCarList();
     }
 
+    public void initGame(CarList carList) {
+        this.carList = carList;
+    }
+
     public void endGameIfFinalRound(int nowRound, int tryNumber) {
-        if (nowRound > tryNumber) {
-            carList.clearCarList();
-        }
+        carList.clearCarList(nowRound, tryNumber);
     }
 }

@@ -6,35 +6,37 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CarList {
-    private List<Car> carList;
+    private List<Car> cars;
     private final CarName carName;
 
     public CarList(String playerInput) {
         this.carName = new CarName(playerInput);
-        this.carList = new ArrayList<>();
+        this.cars = new ArrayList<>();
         makeCarList();
     }
 
     public void startRace() {
-        for(Car car : carList) {
+        for(Car car : cars) {
             car.startRound();
         }
     }
 
     public List<Car> getCarList() {
-        return carList;
+        return cars;
     }
 
-    public void clearCarList() {
-        carList.clear();
+    public void clearCarList(int nowRound, int tryNumber) {
+        if (nowRound > tryNumber) {
+            cars.clear();
+        }
     }
 
     public List<String> getWinnerList() {
-        Collections.sort(carList, (o1,o2) -> {
+        Collections.sort(cars, (o1,o2) -> {
             return o2.getRaceCount() - o1.getRaceCount();
         });
-        int winnerRaceCount = carList.get(0).getRaceCount();
-        return carList.stream()
+        int winnerRaceCount = cars.get(0).getRaceCount();
+        return cars.stream()
                 .filter(car -> car.getRaceCount() == winnerRaceCount)
                 .map(Car::getName)
                 .collect(Collectors.toList());
@@ -43,7 +45,7 @@ public class CarList {
     private void makeCarList() {
         String[] carNameArray = carName.getValidatedPlayerInput().split(",");
         for(String carName : carNameArray) {
-            carList.add(new Car(carName));
+            cars.add(new Car(carName));
         }
     }
 }

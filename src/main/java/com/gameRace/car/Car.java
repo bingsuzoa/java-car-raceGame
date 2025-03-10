@@ -11,7 +11,7 @@ public class Car {
 
     public Car(String name) {
         this.name = name;
-        this.raceCount = 0;
+        this.raceCount = 1;
         random = new Random();
     }
 
