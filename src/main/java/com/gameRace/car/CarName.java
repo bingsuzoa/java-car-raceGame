@@ -1,7 +1,9 @@
 package com.gameRace.car;
 
-import com.gameRace.carRaceException.carNameException.DuplicatedCarNameException;
-import com.gameRace.carRaceException.carNameException.InvalidDelimiterPosition;
+
+
+import com.gameRace.game.gameException.carNameException.DuplicatedCarNameException;
+import com.gameRace.game.gameException.carNameException.InvalidDelimiterPosition;
 
 import java.util.HashSet;
 import java.util.Set;

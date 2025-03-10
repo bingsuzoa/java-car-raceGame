@@ -1,7 +1,9 @@
 package com.gameRace.car;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarList {
     private List<Car> carList;
@@ -13,14 +15,33 @@ public class CarList {
         makeCarList();
     }
 
-    private void makeCarList() {
-        String[] carNameArray = carName.getValidatedPlayerInput().split(",");
-        for(String carName : carNameArray) {
-            carList.add(new Car(carName));
+    public void startRace() {
+        for(Car car : carList) {
+            car.startRound();
         }
     }
 
     public List<Car> getCarList() {
         return carList;
+    }
+
+    public void clearCarList() {
+        carList.clear();
+    }
+
+    public List<String> getWinnerList() {
+        Collections.sort(carList, Collections.reverseOrder());
+        int winnerRaceCount = carList.get(0).getRaceCount();
+        return carList.stream()
+                .filter(car -> car.getRaceCount() == winnerRaceCount)
+                .map(Car::getName)
+                .collect(Collectors.toList());
+    }
+
+    private void makeCarList() {
+        String[] carNameArray = carName.getValidatedPlayerInput().split(",");
+        for(String carName : carNameArray) {
+            carList.add(new Car(carName));
+        }
     }
 }
