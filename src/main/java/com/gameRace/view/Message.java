@@ -1,13 +1,11 @@
 package com.gameRace.view;
 
 public enum Message {
-    GET_CAR_NUMBER("자동차 대수는 몇 대인가요?"),
+    CAR_NAMES_INPUT_MESSAGE("경주할 자동차 이름을 입력하세요(이름은 쉼표(,) 기준으로 구분)"),
 
-    GET_TRY_NUMBER("시도할 횟수는 몇 회인가요?"),
+    TRY_NUMBER_INPUT_MESSAGE("시도할 횟수는 몇 회인가요?"),
 
     RESULT_MESSAGE("실행 결과"),
-
-    ERROR_INVALID_INPUT("올바른 입력이 아닙니다. 다시 입력해주세요"),
 
     CAR("-");
 
