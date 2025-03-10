@@ -22,6 +22,13 @@
 
 - [X] 자동차 입력이 올바르지 않는 경우 예외를 발생시킨다.<br/>
 
+### *<span style = 'color : #FFCD28'>TryRound</span>*<br/>
+
+#### *<span style = 'color : #A8F552'>TryRound</span>*<br/>
+**🔆 역할 : 사용자로부터 경주를 시도할 횟수를 얻는다.**<br/>
+
+- [X] 유효한 입력이 아닌 경우 객체가 생성되지 않도록 설계한다.<br/>
+
 ### *<span style = 'color : #FFCD28'>GameController</span>*<br/>
 **🔆 역할 : 플레이어로부터 받은 입력을 Service에 전달하고, Service로부터 받은 결값을 View에 전달한다.**<br/>
 
