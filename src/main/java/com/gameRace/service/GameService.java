@@ -1,13 +1,14 @@
-package com.gameRace;
+package com.gameRace.service;
 
-import com.gameRace.car.Car;
-import com.gameRace.car.CarList;
+
+import com.gameRace.model.car.Car;
+import com.gameRace.model.car.Cars;
 
 import java.util.List;
 
 public class GameService {
     private int nowRound;
-    private CarList carList;
+    private Cars cars;
 
     public GameService() {
         nowRound = 1;
@@ -18,20 +19,20 @@ public class GameService {
     }
 
     public List<String> getWinnerNames() {
-        return carList.getWinnerList();
+        return cars.getWinnerList();
     }
 
     public List<Car> getRaceResult() {
-        carList.startRace();
+        cars.startRace();
         this.nowRound++;
-        return carList.getCarList();
+        return cars.getCarList();
     }
 
-    public void initGame(CarList carList) {
-        this.carList = carList;
+    public void initGame(Cars cars) {
+        this.cars = cars;
     }
 
     public void endGameIfFinalRound(int nowRound, int tryNumber) {
-        carList.clearCarList(nowRound, tryNumber);
+        cars.clearCarList(nowRound, tryNumber);
     }
 }

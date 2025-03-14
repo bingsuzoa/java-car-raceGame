@@ -1,4 +1,4 @@
-package com.gameRace.car;
+package com.gameRace.model.car;
 
 import com.gameRace.view.Message;
 
@@ -25,7 +25,7 @@ public class Car {
 
     public String getRaceCountResult() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = 0; i < raceCount; i++) {
+        for (int i = 0; i < raceCount; i++) {
             stringBuilder.append(Message.CAR.getMessage());
         }
         return stringBuilder.toString();
@@ -37,8 +37,8 @@ public class Car {
 
     private void goOrStop() {
         int number = random.nextInt(9) + 1;
-        if(number >= 4) {
-            raceCount ++;
+        if (number >= 4) {
+            raceCount++;
         }
     }
 

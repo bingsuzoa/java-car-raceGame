@@ -1,6 +1,4 @@
-package com.gameRace.car;
-
-
+package com.gameRace.model.car;
 
 
 import java.util.HashSet;
@@ -11,10 +9,10 @@ public class CarName {
 
     public CarName(String playerInput) {
         playerInput = playerInput.replace(" ", "");
-        if(!playerInput.matches("^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)+$")) {
+        if (!playerInput.matches("^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)+$")) {
             throw new InvalidDelimiterPosition();
         }
-        if(!checkDuplicatedCarName(playerInput)) {
+        if (!checkDuplicatedCarName(playerInput)) {
             throw new DuplicatedCarNameException();
         }
         this.playerInput = playerInput;
@@ -24,11 +22,11 @@ public class CarName {
         String[] carNameArrayForDuplicationCheck = playerInput.split(",");
         Set<String> carNameSetForDuplicationCheck = new HashSet<>();
 
-        for(String carName : carNameArrayForDuplicationCheck) {
+        for (String carName : carNameArrayForDuplicationCheck) {
             carName = carName.replace(" ", "");
             carNameSetForDuplicationCheck.add(carName);
         }
-        if(carNameSetForDuplicationCheck.size() != carNameArrayForDuplicationCheck.length) {
+        if (carNameSetForDuplicationCheck.size() != carNameArrayForDuplicationCheck.length) {
             return false;
         }
         return true;
@@ -37,10 +35,6 @@ public class CarName {
     public String getValidatedPlayerInput() {
         return playerInput;
     }
-
-
-
-
 
 
 }

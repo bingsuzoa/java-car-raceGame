@@ -1,22 +1,23 @@
-package com.gameRace.car;
+package com.gameRace.model.car;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CarList {
+public class Cars {
     private List<Car> cars;
     private final CarName carName;
 
-    public CarList(String playerInput) {
+    public Cars(String playerInput) {
         this.carName = new CarName(playerInput);
         this.cars = new ArrayList<>();
         makeCarList();
     }
 
     public void startRace() {
-        for(Car car : cars) {
+        for (Car car : cars) {
             car.startRound();
         }
     }
@@ -32,7 +33,7 @@ public class CarList {
     }
 
     public List<String> getWinnerList() {
-        Collections.sort(cars, (o1,o2) -> {
+        Collections.sort(cars, (o1, o2) -> {
             return o2.getRaceCount() - o1.getRaceCount();
         });
         int winnerRaceCount = cars.get(0).getRaceCount();
@@ -44,7 +45,7 @@ public class CarList {
 
     private void makeCarList() {
         String[] carNameArray = carName.getValidatedPlayerInput().split(",");
-        for(String carName : carNameArray) {
+        for (String carName : carNameArray) {
             cars.add(new Car(carName));
         }
     }
