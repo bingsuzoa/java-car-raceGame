@@ -1,11 +1,11 @@
-package com.gameRace.tryRound;
+package com.gameRace.model.tryRound;
 
 
 public class TryRound {
     private final int tryRound;
 
     public TryRound(String tryRound) {
-        if(!tryRound.matches("^[1-9][0-9]*$")) {
+        if (!tryRound.matches("^[1-9][0-9]*$")) {
             throw new InvalidTryNumberException();
         }
         this.tryRound = Integer.parseInt(tryRound);

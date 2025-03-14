@@ -1,6 +1,7 @@
 package com.gameRace.view;
 
-import com.gameRace.car.Car;
+
+import com.gameRace.model.car.Car;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +21,7 @@ public class OutputView {
     }
 
     public void printRaceResult(List<Car> raceResultForRound) {
-        for(Car car : raceResultForRound) {
+        for (Car car : raceResultForRound) {
             System.out.println(car.getName() + " : " + car.getRaceCountResult());
         }
         System.out.println();
