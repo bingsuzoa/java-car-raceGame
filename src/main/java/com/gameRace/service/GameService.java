@@ -25,7 +25,7 @@ public class GameService {
     public List<Car> getRaceResult() {
         cars.startRace();
         this.nowRound++;
-        return cars.getCarList();
+        return cars.getCars();
     }
 
     public void initGame(Cars cars) {
@@ -33,6 +33,6 @@ public class GameService {
     }
 
     public void endGameIfFinalRound(int nowRound, int tryNumber) {
-        cars.clearCarList(nowRound, tryNumber);
+        cars.clearCars(nowRound, tryNumber);
     }
 }

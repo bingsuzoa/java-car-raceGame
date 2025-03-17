@@ -1,6 +1,5 @@
 package com.gameRace.controller;
 
-
 import com.gameRace.model.car.Cars;
 import com.gameRace.model.tryRound.TryRound;
 import com.gameRace.service.GameService;
@@ -12,15 +11,15 @@ public class GameController {
     private final InputView inputView = InputView.getInputView();
     private final OutputView outputView = OutputView.getOutputView();
     private final GameService gameService;
-    TryRound tryRound;
-    Cars cars;
+    private TryRound tryRound;
+    private Cars cars;
 
     public GameController(GameService gameService) {
         this.gameService = gameService;
     }
 
     public void startGame() {
-        getCarList();
+        getCars();
         getTryRound();
         outputView.printString(Message.RESULT_MESSAGE.getMessage());
         gameService.initGame(cars);
@@ -31,14 +30,14 @@ public class GameController {
         gameService.endGameIfFinalRound(gameService.getNowRound(), tryRound.getTryRound());
     }
 
-    private void getCarList() {
+    private void getCars() {
         String playerInputOfCarName;
         do {
             playerInputOfCarName = inputView.getCarNameInput();
-        } while (!validateCarList(playerInputOfCarName));
+        } while (!validateCars(playerInputOfCarName));
     }
 
-    private boolean validateCarList(String playerInput) {
+    private boolean validateCars(String playerInput) {
         try {
             cars = new Cars(playerInput);
         } catch (RuntimeException e) {

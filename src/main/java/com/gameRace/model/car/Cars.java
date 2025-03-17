@@ -13,7 +13,7 @@ public class Cars {
     public Cars(String playerInput) {
         this.carName = new CarName(playerInput);
         this.cars = new ArrayList<>();
-        makeCarList();
+        makeCars();
     }
 
     public void startRace() {
@@ -22,11 +22,11 @@ public class Cars {
         }
     }
 
-    public List<Car> getCarList() {
+    public List<Car> getCars() {
         return cars;
     }
 
-    public void clearCarList(int nowRound, int tryNumber) {
+    public void clearCars(int nowRound, int tryNumber) {
         if (nowRound > tryNumber) {
             cars.clear();
         }
@@ -43,7 +43,7 @@ public class Cars {
                 .collect(Collectors.toList());
     }
 
-    private void makeCarList() {
+    private void makeCars() {
         String[] carNameArray = carName.getValidatedPlayerInput().split(",");
         for (String carName : carNameArray) {
             cars.add(new Car(carName));
