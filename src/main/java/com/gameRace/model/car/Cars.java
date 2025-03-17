@@ -1,19 +1,14 @@
 package com.gameRace.model.car;
 
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Cars {
-    private List<Car> cars;
-    private final CarName carName;
+    private final List<Car> cars;
 
-    public Cars(String playerInput) {
-        this.carName = new CarName(playerInput);
-        this.cars = new ArrayList<>();
-        makeCars();
+    public Cars(List<Car> cars) {
+        this.cars = cars;
     }
 
     public void startRace() {
@@ -26,27 +21,21 @@ public class Cars {
         return cars;
     }
 
-    public void clearCars(int nowRound, int tryNumber) {
-        if (nowRound > tryNumber) {
+    public void clearCars(int nowRound, int tryRound) {
+        if (nowRound > tryRound) {
             cars.clear();
         }
     }
 
-    public List<String> getWinnerList() {
+    public List<String> getWinners() {
         Collections.sort(cars, (o1, o2) -> {
-            return o2.getRaceCount() - o1.getRaceCount();
+            return o2.getPosition() - o1.getPosition();
         });
-        int winnerRaceCount = cars.get(0).getRaceCount();
+        int winnerPosition = cars.get(0).getPosition();
         return cars.stream()
-                .filter(car -> car.getRaceCount() == winnerRaceCount)
+                .filter(car -> car.getPosition() == winnerPosition)
                 .map(Car::getName)
                 .collect(Collectors.toList());
     }
 
-    private void makeCars() {
-        String[] carNameArray = carName.getValidatedPlayerInput().split(",");
-        for (String carName : carNameArray) {
-            cars.add(new Car(carName));
-        }
-    }
 }
