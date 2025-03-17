@@ -1,29 +1,28 @@
 package com.gameRace.model.car;
 
+import com.gameRace.model.condition.Condition;
 import com.gameRace.view.Message;
-
-import java.util.Random;
 
 public class Car {
     private final String name;
     private int position;
-    private final Random random;
+    private final Condition condition;
 
-    public Car(String name) {
+    public Car(String name, Condition condition) {
         this.name = name;
         this.position = 1;
-        random = new Random();
+        this.condition = condition;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getRaceCount() {
+    public int getPosition() {
         return position;
     }
 
-    public String getRaceCountResult() {
+    public String getThisRoundResult() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < position; i++) {
             stringBuilder.append(Message.CAR.getMessage());
@@ -36,7 +35,7 @@ public class Car {
     }
 
     private void goOrStop() {
-        int number = random.nextInt(9) + 1;
+        int number = condition.getCondition();
         if (number >= 4) {
             position++;
         }

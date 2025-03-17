@@ -1,18 +1,18 @@
 package com.gameRace.controller;
 
-import com.gameRace.model.car.Cars;
-import com.gameRace.model.tryRound.TryRound;
+import com.gameRace.model.car.CarNames;
 import com.gameRace.service.GameService;
 import com.gameRace.view.InputView;
 import com.gameRace.view.Message;
 import com.gameRace.view.OutputView;
 
+
 public class GameController {
     private final InputView inputView = InputView.getInputView();
     private final OutputView outputView = OutputView.getOutputView();
     private final GameService gameService;
-    private TryRound tryRound;
-    private Cars cars;
+    private CarNames carNames;
+
 
     public GameController(GameService gameService) {
         this.gameService = gameService;
@@ -20,26 +20,26 @@ public class GameController {
 
     public void startGame() {
         getCars();
-        getTryRound();
+        int tryRound = getTryRound();
+        gameService.initGame(carNames);
         outputView.printString(Message.RESULT_MESSAGE.getMessage());
-        gameService.initGame(cars);
-        while (gameService.getNowRound() <= tryRound.getTryRound()) {
+        while (gameService.getNowRound() <= tryRound) {
             outputView.printRaceResult(gameService.getRaceResult());
         }
-        outputView.printWinnerNames(gameService.getWinnerNames());
-        gameService.endGameIfFinalRound(gameService.getNowRound(), tryRound.getTryRound());
+        outputView.printWinners(gameService.getWinners());
+        gameService.endGameIfFinalRound(gameService.getNowRound(), tryRound);
     }
 
     private void getCars() {
-        String playerInputOfCarName;
+        String playerInput;
         do {
-            playerInputOfCarName = inputView.getCarNameInput();
-        } while (!validateCars(playerInputOfCarName));
+            playerInput = inputView.getCarNameInput();
+        } while (!validateCars(playerInput));
     }
 
     private boolean validateCars(String playerInput) {
         try {
-            cars = new Cars(playerInput);
+            carNames = new CarNames(playerInput);
         } catch (RuntimeException e) {
             outputView.printString(e.getMessage());
             return false;
@@ -47,20 +47,11 @@ public class GameController {
         return true;
     }
 
-    private void getTryRound() {
-        String playerInputOfTryRound;
+    private int getTryRound() {
+        int tryRound;
         do {
-            playerInputOfTryRound = inputView.getTryRoundInput();
-        } while (!validateTryRound(playerInputOfTryRound));
-    }
-
-    private boolean validateTryRound(String input) {
-        try {
-            tryRound = new TryRound(input);
-        } catch (RuntimeException e) {
-            outputView.printString(e.getMessage());
-            return false;
-        }
-        return true;
+            tryRound = inputView.getTryRoundInput();
+        } while (tryRound == 0);
+        return tryRound;
     }
 }
