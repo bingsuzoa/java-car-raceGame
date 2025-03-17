@@ -1,37 +1,35 @@
 package com.gameRace.view;
 
 
+import com.gameRace.model.car.Car;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class OutputView {
     private static final OutputView outputView = new OutputView();
 
+    private OutputView() {
+    }
 
-    public static OutputView getInstance() {
-        if (outputView == null) {
-            return new OutputView();
-        }
+    public static OutputView getOutputView() {
         return outputView;
     }
 
-    public void printMessage(Message message) {
-        System.out.println(message.getMessage());
+    public void printString(String message) {
+        System.out.println(message);
     }
 
-    public void printNotInvalidMessage() {
-        System.out.println(Message.ERROR_INVALID_INPUT.getMessage());
-    }
-
-    public void printResultMessage() {
-        System.out.println(Message.RESULT_MESSAGE.getMessage());
-    }
-
-    public void printResult(int moveCount) {
-        for (int i = 0; i < moveCount; i++) {
-            System.out.print(Message.CAR.getMessage());
+    public void printRaceResult(List<Car> raceResultForRound) {
+        for (Car car : raceResultForRound) {
+            System.out.println(car.getName() + " : " + car.getRaceCountResult());
         }
         System.out.println();
     }
 
-    public void printBlank() {
-        System.out.println();
+    public void printWinnerNames(List<String> winnerNameList) {
+        String winnerNames = winnerNameList.stream()
+                .collect(Collectors.joining(", "));
+        System.out.println(winnerNames + "가 최종 우승 하셨습니다!");
     }
 }

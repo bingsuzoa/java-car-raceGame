@@ -1,40 +1,38 @@
 package com.gameRace.service;
 
-import com.gameRace.model.Car;
-import com.gameRace.model.condition.Condition;
 
-import java.util.ArrayList;
+import com.gameRace.model.car.Car;
+import com.gameRace.model.car.Cars;
+
 import java.util.List;
 
 public class GameService {
-    private static final int FIRST_ATTEMPT = 1;
-    private final Condition condition;
-    private List<Car> carList;
+    private int nowRound;
+    private Cars cars;
 
-    public GameService(Condition condition) {
-        this.condition = condition;
-        this.carList = new ArrayList<>();
+    public GameService() {
+        nowRound = 1;
     }
 
-    public List<Car> startGame(int tryNumber, int carNumber) {
-        if(tryNumber == FIRST_ATTEMPT) {
-            makeCarList(carNumber);
-        }
-        for (Car car : carList) {
-            car.move();
-        }
-        return carList;
+    public int getNowRound() {
+        return nowRound;
     }
 
-    public void checkGameOver(int nowTryNumber, int tryNumber) {
-        if (nowTryNumber == tryNumber) {
-            carList.clear();
-        }
+    public List<String> getWinnerNames() {
+        return cars.getWinnerList();
     }
 
-    private void makeCarList(int carNumber) {
-        for (int i = 0; i < carNumber; i++) {
-            carList.add(new Car(condition));
-        }
+    public List<Car> getRaceResult() {
+        cars.startRace();
+        this.nowRound++;
+        return cars.getCars();
+    }
+
+    public void initGame(Cars cars) {
+        this.cars = cars;
+    }
+
+    public void endGameIfFinalRound(int nowRound, int tryNumber) {
+        cars.clearCars(nowRound, tryNumber);
     }
 }
