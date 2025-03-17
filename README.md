@@ -10,7 +10,7 @@
 - [X] Car 객체의 필드는 Car의 이름과 얼마큼 전진했는지에 대한 정보를 갖는다.<br/>
 - [X] Car가 전진한 만큼 "-" 형태로 출력할 수 있다.<br/>
 
-#### *<span style = 'color : #A8F552'>CarList</span>*<br/>
+#### *<span style = 'color : #A8F552'>Cars</span>*<br/>
 **🔆 역할 : Car들의 정보를 관리한다.**<br/>
 
 - [X] 라운드 경기가 시작하면 Car들에게 경주를 시작하라고 알린다.<br/>
