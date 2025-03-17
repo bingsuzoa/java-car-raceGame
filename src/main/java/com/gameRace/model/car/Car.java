@@ -6,12 +6,12 @@ import java.util.Random;
 
 public class Car {
     private final String name;
-    private int raceCount;
+    private int position;
     private final Random random;
 
     public Car(String name) {
         this.name = name;
-        this.raceCount = 1;
+        this.position = 1;
         random = new Random();
     }
 
@@ -20,12 +20,12 @@ public class Car {
     }
 
     public int getRaceCount() {
-        return raceCount;
+        return position;
     }
 
     public String getRaceCountResult() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < raceCount; i++) {
+        for (int i = 0; i < position; i++) {
             stringBuilder.append(Message.CAR.getMessage());
         }
         return stringBuilder.toString();
@@ -38,7 +38,7 @@ public class Car {
     private void goOrStop() {
         int number = random.nextInt(9) + 1;
         if (number >= 4) {
-            raceCount++;
+            position++;
         }
     }
 
