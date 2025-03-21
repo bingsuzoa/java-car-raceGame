@@ -1,17 +1,17 @@
 package com.gameRace.controller;
 
-import com.gameRace.model.car.CarNames;
+import com.gameRace.gameException.DuplicatedCarNamesException;
+import com.gameRace.gameException.InvalidCarNameLengthException;
+import com.gameRace.gameException.InvalidDelimiterPosition;
 import com.gameRace.service.GameService;
 import com.gameRace.view.InputView;
 import com.gameRace.view.Message;
 import com.gameRace.view.OutputView;
 
-
 public class GameController {
     private final InputView inputView = InputView.getInputView();
     private final OutputView outputView = OutputView.getOutputView();
     private final GameService gameService;
-    private CarNames carNames;
 
 
     public GameController(GameService gameService) {
@@ -19,9 +19,16 @@ public class GameController {
     }
 
     public void startGame() {
-        getCars();
+        try {
+            start();
+        } catch (RuntimeException e) {
+            outputView.printString(e.getMessage());
+        }
+    }
+
+    private void start() {
+        getCarNames();
         int tryRound = getTryRound();
-        gameService.initGame(carNames);
         outputView.printString(Message.RESULT_MESSAGE.getMessage());
         while (gameService.getNowRound() <= tryRound) {
             outputView.printRaceResult(gameService.getRaceResult());
@@ -30,21 +37,48 @@ public class GameController {
         gameService.endGameIfFinalRound(gameService.getNowRound(), tryRound);
     }
 
-    private void getCars() {
+    private void getCarNames() {
         String playerInput;
+        boolean isValidCarNames;
+        boolean isValidCarNameLength;
         do {
             playerInput = inputView.getCarNameInput();
-        } while (!validateCars(playerInput));
+            isValidCarNames = validateCarNames(playerInput);
+            isValidCarNameLength = validateCars(isValidCarNames, playerInput);
+        } while (!isValidCarNames || !isValidCarNameLength);
     }
 
-    private boolean validateCars(String playerInput) {
+    private boolean validateCars(boolean isValidCarNames, String playerInput) {
         try {
-            carNames = new CarNames(playerInput);
+            getCars(isValidCarNames, playerInput);
+            return true;
         } catch (RuntimeException e) {
             outputView.printString(e.getMessage());
-            return false;
         }
-        return true;
+        return false;
+    }
+
+    private void getCars(boolean isValidCarNames, String playerInput) {
+        if (isValidCarNames) {
+            gameService.getCars(playerInput);
+        }
+    }
+
+    private boolean validateCarNames(String playerInput) {
+        try {
+            validatePlayerInput(playerInput);
+            return true;
+        } catch (RuntimeException e) {
+            outputView.printString(e.getMessage());
+        }
+        return false;
+    }
+
+    private void validatePlayerInput(String playerInput) {
+        playerInput = playerInput.replace(" ", "");
+        if (!playerInput.matches("^[a-zA-Z0-9]+(,[a-zA-Z0-9]+)+$")) {
+            throw new InvalidDelimiterPosition();
+        }
     }
 
     private int getTryRound() {

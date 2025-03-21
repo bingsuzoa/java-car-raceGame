@@ -3,19 +3,21 @@ package com.gameRace.model.car;
 import com.gameRace.model.condition.Condition;
 import com.gameRace.view.Message;
 
+import java.util.Objects;
+
 public class Car {
-    private final String name;
+    private final CarName carName;
     private int position;
     private final Condition condition;
 
-    public Car(String name, Condition condition) {
-        this.name = name;
+    public Car(CarName carName, Condition condition) {
+        this.carName = carName;
         this.position = 1;
         this.condition = condition;
     }
 
     public String getName() {
-        return name;
+        return carName.getCarName();
     }
 
     public int getPosition() {
@@ -41,5 +43,15 @@ public class Car {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return position == car.position && Objects.equals(carName, car.carName) && Objects.equals(condition, car.condition);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(carName, position, condition);
+    }
 }
