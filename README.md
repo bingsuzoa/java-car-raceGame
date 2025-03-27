@@ -2,9 +2,9 @@
 
 ### 구현 기능 목록
 
-### *<span style = 'color : #FFCD28'>Condition</span>*<br/>
+### *<span style = 'color : #FFCD28'>Model</span>*<br/>
 
-#### *<span style = 'color : #A8F552'>RandomNumberCondition</span>*<br/>
+#### *<span style = 'color : #A8F552'>condition : RandomNumberCondition</span>*<br/>
 
 **🔆 역할 : 1 - 9까지의 랜덤 숫자를 생성한다.**<br/>
 

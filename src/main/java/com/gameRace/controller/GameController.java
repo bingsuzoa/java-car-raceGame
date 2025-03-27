@@ -1,7 +1,5 @@
 package com.gameRace.controller;
 
-import com.gameRace.gameException.DuplicatedCarNamesException;
-import com.gameRace.gameException.InvalidCarNameLengthException;
 import com.gameRace.gameException.InvalidDelimiterPosition;
 import com.gameRace.service.GameService;
 import com.gameRace.view.InputView;
