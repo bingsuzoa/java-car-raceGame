@@ -47,11 +47,11 @@ public class Car {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return position == car.position && Objects.equals(carName, car.carName) && Objects.equals(condition, car.condition);
+        return Objects.equals(carName, car.carName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(carName, position, condition);
+        return Objects.hashCode(carName);
     }
 }
